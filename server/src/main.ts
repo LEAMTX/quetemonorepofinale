@@ -1,6 +1,6 @@
 // Load environment variables from .env file
 import "dotenv/config";
-
+import type { RequestHandler } from "express";
 // Check database connection
 // Note: This is optional and can be removed if the database connection
 // is not required when starting the application
@@ -13,6 +13,13 @@ import app from "./app";
 const port = process.env.APP_PORT;
 
 // Start the server and listen on the specified port
+//ajout pour challenge 2:
+const sayCoucou: RequestHandler = (req, res) => {
+  res.send("Hello, Wild series");
+};
+//Ajout de la route: http://localhost:4000/coucou
+app.get("/coucou", sayCoucou);
+
 app
   .listen(port, () => {
     console.info(`Server is listening on port ${port}`);
