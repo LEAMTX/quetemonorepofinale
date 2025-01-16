@@ -31,6 +31,7 @@ import programActions from "./modules/item/program/programActions";
 // const router2 = Router();
 //route get/api/program
 router.get("/api/program", programActions.browse);
+//http://localhost:3001/api/program
 //http://localhost:4000/api/program
 //quete 4: ajouter la route des categories
 import categoryAction from "./modules/category/categoryAction";

@@ -1,3 +1,4 @@
+import categoryRepository from "./categoryRepository";
 // Some data to make the trick
 const categories = [
   {
@@ -14,9 +15,12 @@ const categories = [
 import type { RequestHandler } from "express";
 
 // Action to get all categories
-const browse: RequestHandler = (req, res) => {
-  res.json(categories);
+const browse: RequestHandler = async (req, res) => {
+  const categoriesFromDB = await categoryRepository.readAll();
+
+  res.json(categoriesFromDB);
 };
+
 const read: RequestHandler = (req, res) => {
   const id = Number.parseInt(req.params.id); //api/categories/1=req.params.id, je souhaite récupérer le 1 chaine de caractère(string)  et le convertir en un nombre entier
   //comparer l'id convertir en number à l'id des categories avec la methode .find
@@ -25,7 +29,7 @@ const read: RequestHandler = (req, res) => {
     (categorieselement) => categorieselement.id === id,
   );
   //error si c'est mal réalisé:
-  if (category) {
+  if (category != null) {
     res.json(category);
   } else {
     res.sendStatus(404);
